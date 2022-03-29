@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h1 File status
+    h3 File UUID
+    p(class="file-name")=name
+    p(class="file-status")=status
+    a(class="link")
+
+    script(src="/javascripts/autoRefresh.js") 

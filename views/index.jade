@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1 PDF file compressor
+  p Its web app to compress pdf files
+
+  form(action="compress", enctype="multipart/form-data", method="post") 
+    label Select file
+      input(type="file", name="name", accept="application/pdf")
+    
+    input(type="submit", value="Send")
+  
+  h1(class="error")= message
+  p(class="error")= desc
