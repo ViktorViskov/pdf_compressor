@@ -4,19 +4,34 @@ fileStatus = document.querySelector(".file-status");
 link = document.querySelector(".link");
 
 // function for get status
-async function refresh() {
+async function refresh(timer) {
     // make request
     let response = await fetch(`/status/${fileName.textContent}`,{method:'GET' });
 
     // convert to json
     let jsonObj = await response.json();
 
-    // update UI
-    fileStatus.textContent = jsonObj.status;
-    link.textContent = jsonObj.linkName;
-    link.href = jsonObj.link;
-}
+    // check for status ready
+    if (jsonObj.status == "Ready!") {
 
-setTimeout(()=>{refresh()}, 5000);
-// start every 5 sec
-// window.setInterval(refresh, 5000); 	
+        // change UI to load link
+        fileStatus.textContent = jsonObj.status;
+        link.classList.remove("hidden");
+        fileStatus.classList.add("success");
+
+        // stop timer
+        clearInterval(timer);
+    }
+
+    // file was deleted
+    else if (jsonObj.status == "File was deleted from server"){
+        // change UI to load link
+        fileStatus.textContent = jsonObj.status;
+        fileStatus.classList.add("error");
+
+        // stop timer
+        clearInterval(timer);
+    }
+}
+// wait 1 and refresh status every 3 sec
+setTimeout(()=>{let timer = window.setInterval(() => {refresh(timer);}, 3000); },1000);

@@ -1,10 +1,11 @@
 extends layout
 
 block content
+    a(href="/") Main
     h1 File status
     h3 File UUID
     p(class="file-name")=name
-    p(class="file-status")=status
-    a(class="link")
+    h2(class="file-status")=status
+    a(class="link hidden", href=href, download) Load
 
     script(src="/javascripts/autoRefresh.js") 

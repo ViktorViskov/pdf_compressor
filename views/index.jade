@@ -2,11 +2,14 @@ extends layout
 
 block content
   h1 PDF file compressor
-  p Its web app to compress pdf files
+  h3 Its web app to compress pdf files
+  h3 Max file size is 100mb
+  h3(class="error") Files will be deleted from server after 1 hour!
+  p After compressing, link to file will get only you, but all who have link can download file
 
-  form(action="compress", enctype="multipart/form-data", method="post") 
+  form(action="compress", enctype="multipart/form-data", method="post", class="form") 
     label Select file
-      input(type="file", name="name", accept="application/pdf")
+      input(type="file", name="name", accept="application/pdf", required, class="")
     
     input(type="submit", value="Send")
   
