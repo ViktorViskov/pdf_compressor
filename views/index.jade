@@ -1,17 +1,21 @@
 extends layout
 
 block content
-  h1 PDF file compressor
-  h3 Its web app to compress pdf files
-  h3 Max file size is 100mb
-  h3(class="error") Files will be deleted from server after 1 hour!
-  p After compressing, link to file will get only you, but all who have link can download file
+  div(class="header")
+    h1 PDF file compressor
+    h3 Its web app to compress pdf files
+    h3 Max file size is 100mb
+    h3(class="error") Files will be deleted from server after 1 hour!
+    p After compressing, link to file will get only you, but all who have link can download file
 
-  form(action="compress", enctype="multipart/form-data", method="post", class="form") 
-    label Select file
-      input(type="file", name="name", accept="application/pdf", required, class="")
+  div(class="content")
+    form(action="compress", enctype="multipart/form-data", method="post", class="form") 
+      input(id="fileInput" type="file", name="file", accept="application/pdf", required, class="input hidden")
+      label(for="fileInput" class="label") Select file
+      input(type="submit", value="Send" class="input")
     
-    input(type="submit", value="Send")
+    h1(class="error")= message
+    p(class="error")= desc
   
-  h1(class="error")= message
-  p(class="error")= desc
+  script(src="/javascripts/index.js") 
+

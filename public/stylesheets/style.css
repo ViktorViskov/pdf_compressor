@@ -19,8 +19,38 @@ a {
   display: none;
 }
 
+.header {
+  text-align: center;
+}
+
+.content {
+  text-align: center;
+}
+
 .form {
   display: flex;
   flex-direction: column;
+  text-align: center;
+}
 
+.label {
+  text-align: center;
+  padding: 20px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.input {
+  padding: 20px;
+  font-size: 20px;
+  text-align: center;
+  border: none;
+  background: none;
+  transition: 200ms;
+}
+
+.input:hover {
+  font-style: italic;
+  font-weight: bold;
+  color: blue;
 }
