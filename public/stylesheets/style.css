@@ -29,6 +29,8 @@ a {
 
 .form {
   display: flex;
+  max-width: 700px;
+  margin: auto;
   flex-direction: column;
   text-align: center;
 }
@@ -38,6 +40,8 @@ a {
   padding: 20px;
   font-weight: bold;
   font-style: italic;
+  border-radius: 30px;
+  border: 1px solid #000;
 }
 
 .input {
@@ -46,11 +50,9 @@ a {
   text-align: center;
   border: none;
   background: none;
-  transition: 200ms;
 }
 
 .input:hover {
-  font-style: italic;
   font-weight: bold;
   color: blue;
 }

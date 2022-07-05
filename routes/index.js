@@ -26,8 +26,12 @@ router.post('/compress', async function (req, res, next) {
   bb.on('file', (name, file, info) => {
     // check for correct type
     if (info.mimeType == "application/pdf") {
+
+      // current date for file name
+      let date = new Date()
+
       // generate file name and path
-      const fileName = randomUUID()
+      const fileName = `${randomUUID().slice(0,5)}_${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}_${date.getHours()}.${date.getMinutes()}`
       const saveTo = path.join(upl, `${fileName}.pdf`);
 
       // save file
@@ -51,8 +55,8 @@ router.post('/compress', async function (req, res, next) {
 })
 
 // show page with load file
-router.get('/file/:uuid', function (req, res, next) {
-  res.render("load", { name: req.params.uuid, status: "Checking...", href: `/download/${req.params.uuid}` })
+router.get('/file/:fileName', function (req, res, next) {
+  res.render("load", { name: req.params.fileName, status: "Checking...", href: `/download/${req.params.fileName}_compress.pdf` })
 })
 
 // show file status
@@ -69,6 +73,12 @@ router.get('/status/:uuid', function (req, res, next) {
         fileStatus = "Ready!";
       };
     }
+
+
+
+
+
+
 
     // if error or return status 1 change status message to ready
     catch (RangeError) {
@@ -88,9 +98,9 @@ router.get('/status/:uuid', function (req, res, next) {
 // download file
 router.get("/download/:uuid", function (req, res, next) {
   // check for file is exist
-  if (fs.existsSync(`${com}/${req.params.uuid}_compress.pdf`)) {
+  if (fs.existsSync(`${com}/${req.params.uuid}`)) {
     // send file
-    res.sendFile(`${com}/${req.params.uuid}_compress.pdf`);
+    res.sendFile(`${com}/${req.params.uuid}`);
   }
   else {
     res.redirect(`/file/${fileName}`);
