@@ -8,9 +8,9 @@ const { randomUUID } = require('crypto');
 const { exec, execSync } = require('child_process');
 
 // path to save uploaded files
-const upl = "/public/u"
+const upl = "/tmp"
 //path to compressed files
-const com = "/public/c"
+const com = "/tmp"
 
 /* GET main page. */
 router.get('/', function (req, res, next) {
@@ -73,12 +73,6 @@ router.get('/status/:uuid', function (req, res, next) {
         fileStatus = "Ready!";
       };
     }
-
-
-
-
-
-
 
     // if error or return status 1 change status message to ready
     catch (RangeError) {
